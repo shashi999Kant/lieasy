@@ -106,6 +106,3 @@ This project is a simple Spring Boot application with PostgreSQL integration, pr
 
 Feel free to contribute to this project by opening issues or submitting pull requests. Your contributions are always welcome!
 
-## License
-
-This project is licensed under the [MIT License](LICENSE).
