@@ -109,6 +109,3 @@ Feel free to contribute to this project by opening issues or submitting pull req
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
-```
-
-Make sure to replace `<repository-url>` with the actual URL of your GitHub repository. This README.md provides a basic structure with information about the project, its features, technologies used, how to get started, API endpoints, contributing guidelines, and licensing information. Adjust it based on your project's specifics.
