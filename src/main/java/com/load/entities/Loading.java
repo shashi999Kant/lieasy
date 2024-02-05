@@ -8,7 +8,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 
 @Entity
-public class Load {
+public class Loading {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,23 +24,8 @@ public class Load {
     private String date;
 
     @ManyToOne
-    @JoinColumn(name = "shipper_id")
+    @JoinColumn(name = "shipper")
     private Shipper shipper;
-
-	public Load(Long id, String loadingPoint, String unloadingPoint, String productType, String truckType,
-			int noOfTrucks, int weight, String comment, String date, Shipper shipper) {
-		super();
-		this.id = id;
-		this.loadingPoint = loadingPoint;
-		this.unloadingPoint = unloadingPoint;
-		this.productType = productType;
-		this.truckType = truckType;
-		this.noOfTrucks = noOfTrucks;
-		this.weight = weight;
-		this.comment = comment;
-		this.date = date;
-		this.shipper = shipper;
-	}
 
 	public Long getId() {
 		return id;
@@ -121,7 +106,26 @@ public class Load {
 	public void setShipper(Shipper shipper) {
 		this.shipper = shipper;
 	}
-    
-    
+
+	public Loading(Long id, String loadingPoint, String unloadingPoint, String productType, String truckType,
+			int noOfTrucks, int weight, String comment, String date, Shipper shipper) {
+		super();
+		this.id = id;
+		this.loadingPoint = loadingPoint;
+		this.unloadingPoint = unloadingPoint;
+		this.productType = productType;
+		this.truckType = truckType;
+		this.noOfTrucks = noOfTrucks;
+		this.weight = weight;
+		this.comment = comment;
+		this.date = date;
+		this.shipper = shipper;
+	}
+
+	public Loading() {
+		super();
+	}
+
+	
 }
 

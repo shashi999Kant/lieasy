@@ -15,43 +15,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.load.entities.Load;
-import com.load.service.LoadService;
+import com.load.entities.Loading;
+import com.load.service.LoadingService;
 
-//LoadController.java
+
+
+
 @RestController
 @RequestMapping("/loads")
 public class LoadController {
 
     @Autowired
-    private LoadService loadService;
+    private LoadingService loadService;
 
-    @PostMapping("/load")
-    public ResponseEntity<String> addLoad(@RequestBody Load load, @RequestParam Long shipperId) {
-        loadService.saveLoad(load, shipperId);
-        return ResponseEntity.ok("Load details added successfully");
+    @PostMapping("/load/{shipperId}")
+    public ResponseEntity<String> addLoad(@RequestBody Loading load, @PathVariable Long shipperId) {
+        loadService.saveLoading(load, shipperId);
+        return ResponseEntity.ok("Loading details added successfully");
     }
 
 
- @GetMapping
- public List<Load> getLoadsByShipperId(@RequestParam Long shipperId) {
-     return loadService.getLoadsByShipperId(shipperId);
+    @GetMapping("/load/ship/{shipperId}")
+ public List<Loading> getLoadsByShipperId(@PathVariable Long shipperId) {
+     return loadService.getLoadingsByShipperId(shipperId);
  }
 
  @GetMapping("/load/{loadId}")
- public ResponseEntity<Load> getLoadById(@PathVariable Long loadId) {
-     Optional<Load> load = loadService.getLoadById(loadId);
-     return load.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+ public ResponseEntity<Loading> getLoadById(@PathVariable Long loadId) {
+     Optional<Loading> Loading = loadService.getLoadingById(loadId);
+     return Loading.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
  }
 
- @PutMapping("/load/{loadId}")
- public ResponseEntity<String> updateLoad(@PathVariable Long loadId,@PathVariable Long shipperId, @RequestBody Load updatedLoad) {
-     Optional<Load> existingLoad = loadService.getLoadById(loadId);
+ @PutMapping("/load/{loadId}/{shipId}")
+ public ResponseEntity<String> updateLoad(@PathVariable Long loadId,@PathVariable Long shipperId, @RequestBody Loading updatedLoad) {
+     Optional<Loading> existingLoading = loadService.getLoadingById(loadId);
 
-     if (existingLoad.isPresent()) {
+     if (existingLoading.isPresent()) {
          updatedLoad.setId(loadId);
-         loadService.saveLoad(updatedLoad,shipperId);
-         return ResponseEntity.ok("Load details updated successfully");
+         loadService.saveLoading(updatedLoad, shipperId);
+         return ResponseEntity.ok("Loading details updated successfully");
      } else {
          return ResponseEntity.notFound().build();
      }
@@ -59,11 +61,11 @@ public class LoadController {
 
  @DeleteMapping("/load/{loadId}")
  public ResponseEntity<String> deleteLoad(@PathVariable Long loadId) {
-     Optional<Load> existingLoad = loadService.getLoadById(loadId);
+     Optional<Loading> existingLoading = loadService.getLoadingById(loadId);
 
-     if (existingLoad.isPresent()) {
-         loadService.deleteLoad(loadId);
-         return ResponseEntity.ok("Load deleted successfully");
+     if (existingLoading.isPresent()) {
+         loadService.deleteLoading(loadId);
+         return ResponseEntity.ok("Loading deleted successfully");
      } else {
          return ResponseEntity.notFound().build();
      }
