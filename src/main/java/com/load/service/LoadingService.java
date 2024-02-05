@@ -6,41 +6,41 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.load.entities.Load;
+import com.load.entities.Loading;
 import com.load.entities.Shipper;
 import com.load.repository.LoadRepo;
 import com.load.repository.ShipperRepository;
 
 import jakarta.persistence.EntityNotFoundException;
 
-//LoadService.java
+//LoadingService.java
 @Service
-public class LoadService {
+public class LoadingService {
 
  @Autowired
- private LoadRepo loadRepository;
+ private LoadRepo loadRepo;
  
  @Autowired
  private ShipperRepository shipperRepo;
 
- public Load saveLoad(Load load, Long shipperId) {
+ public Loading saveLoading(Loading Loading, Long shipperId) {
 	 Shipper shipper = shipperRepo.findById(shipperId)
 			 .orElseThrow(() -> new EntityNotFoundException("Shipper with id " + shipperId + " not found"));
 	 
-	 load.setShipper(shipper);
-	 return loadRepository.save(load);
+	 Loading.setShipper(shipper);
+	 return loadRepo.save(Loading);
  }
  
- public List<Load> getLoadsByShipperId(Long shipperId) {
-	 return loadRepository.findByShipperId(shipperId);
+ public List<Loading> getLoadingsByShipperId(Long shipperId) {
+	 return loadRepo.findByShipperId(shipperId);
  }
 
- public Optional<Load> getLoadById(Long loadId) {
-     return loadRepository.findById(loadId);
+ public Optional<Loading> getLoadingById(Long LoadingId) {
+     return loadRepo.findById(LoadingId);
  }
 
- public void deleteLoad(Long loadId) {
-     loadRepository.deleteById(loadId);
+ public void deleteLoading(Long LoadingId) {
+	 loadRepo.deleteById(LoadingId);
  }
 }
 
